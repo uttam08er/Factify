@@ -2,8 +2,13 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import joblib
 import re
+import os
+from dotenv import load_dotenv
 from nltk.corpus import stopwords
 from predict import predict_news
+
+load_dotenv()
+PORT = os.getenv("PORT")
 
 app = Flask(__name__)
 CORS(app)
@@ -50,4 +55,4 @@ def predict():
     return jsonify(result)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=PORT)
